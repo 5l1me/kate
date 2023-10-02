@@ -7,3 +7,6 @@ except ZeroDivisionError:
 class Viper:
     def __init__(self):
         print('ZZZZzzz')
+
+    def __repr__(self):
+        return 'zzz'
