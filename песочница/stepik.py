@@ -1,34 +1,26 @@
-from string import ascii_uppercase as up, ascii_lowercase as low
-
-class CaesarCipher:
-
-    _chars = {i:el for i, el in zip(range(26), low)}
-    _Chars = {i:el for i, el in zip(range(26), up)}
-
-    def __init__(self, x):
+class ArithmeticProgression:
+    def __init__(self, first, x):
+        self.first = first
+        self.num = first
         self.x = x
 
-    def encode(self, word: str):
-        res = ''
-        for let in word:
-            if let in low:
-                res = ''.join((res, self._chars[(low.index(let) + self.x)%26]))
-            elif let in up:
-                res = ''.join((res, self._Chars[(up.index(let) + self.x)%26]))
-            else:
-                res = ''.join((res, let))
-        return res
+    def __iter__(self):
+        return self
 
-    def decode(self, word: str):
-        res = ''
-        for let in word:
-            if let in low:
-                res = ''.join((res, self._chars[(low.index(let) - self.x) % 26]))
-            elif let in up:
-                res = ''.join((res, self._Chars[(up.index(let) - self.x) % 26]))
-            else:
-                res = ''.join((res, let))
+    def __next__(self):
+        res = self.num
+        self.num = self.num+self.x
         return res
 
 
+class GeometricProgression(ArithmeticProgression):
+    def __next__(self):
+        res = self.num
+        self.num = self.num * self.x
+        return self.num
+progression = ArithmeticProgression(0, 1)
 
+for elem in progression:
+    if elem > 10:
+        break
+    print(elem, end=' ')
